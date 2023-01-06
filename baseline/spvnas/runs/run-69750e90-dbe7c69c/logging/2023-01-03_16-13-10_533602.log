@@ -1,0 +1,33 @@
+2023-01-03 16:13:10.536 | __main__:main:42 | INFO | /home/hyphen/miniconda3/envs/torch/bin/python train.py configs/semantic_kitti/spvcnn/cr0p5.yaml --distributed False
+2023-01-03 16:13:10.536 | __main__:main:43 | INFO | Experiment started: "runs/run-69750e90-dbe7c69c".
+workers_per_gpu: 8
+distributed: False
+amp_enabled: True
+data:
+  num_classes: 19
+  ignore_label: 255
+  training_size: 19132
+train:
+  seed: 1588147245
+  deterministic: False
+dataset:
+  name: semantic_kitti
+  root: /dataset/semantic-kitti
+  num_points: 80000
+  voxel_size: 0.05
+num_epochs: 15
+batch_size: 2
+criterion:
+  name: cross_entropy
+  ignore_index: 255
+optimizer:
+  name: sgd
+  lr: 0.24
+  weight_decay: 0.0001
+  momentum: 0.9
+  nesterov: True
+scheduler:
+  name: cosine_warmup
+model:
+  name: spvcnn
+  cr: 0.5
