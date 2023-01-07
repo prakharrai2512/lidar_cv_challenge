@@ -121,7 +121,7 @@ class SemanticKITTIInternal:
             if self.google_mode or trainval:
                 self.seqs.append('X')
         elif self.split == 'val':
-            self.seqs = ['X']
+            self.seqs = ['B', 'T', 'U']
         elif self.split == 'test':
             # self.seqs = [
             #     '00', '01', '02', '03', '04', '05', '06', '07', '09', '10'

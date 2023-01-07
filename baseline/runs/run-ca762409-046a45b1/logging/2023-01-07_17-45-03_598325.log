@@ -1,0 +1,44 @@
+2023-01-07 17:45:03.599 | __main__:main:44 | INFO | /home/shadowkin/spvnasv1/bin/python train.py configs/semantic_kitti/spvcnn/cr7.yaml --distributed False
+2023-01-07 17:45:03.599 | __main__:main:45 | INFO | Experiment started: "runs/run-ca762409-046a45b1".
+workers_per_gpu: 8
+distributed: False
+amp_enabled: True
+data:
+  num_classes: 2
+  ignore_label: 255
+  training_size: 18238
+train:
+  seed: 1588147245
+  deterministic: False
+dataset:
+  name: semantic_kitti
+  root: dataset/semantic-kitti
+  num_points: 8000
+  voxel_size: 5.0
+num_epochs: 1
+batch_size: 8
+criterion:
+  name: cross_entropy
+  ignore_index: 255
+optimizer:
+  name: sgd
+  lr: 0.24
+  weight_decay: 0.0001
+  momentum: 0.9
+  nesterov: True
+scheduler:
+  name: cosine_warmup
+model:
+  name: spvcnn
+  cr: 0.2
+2023-01-07 17:45:04.589 | torchpack.train.trainer:train:70 | INFO | Epoch 1/1 started.
+2023-01-07 17:53:03.200 | torchpack.train.trainer:train:86 | INFO | Training finished in 7 minutes 58 seconds.
+2023-01-07 17:55:13.523 | torchpack.callbacks.inference:_trigger:43 | INFO | Inference finished in 2 minutes 10 seconds.
+2023-01-07 17:55:13.562 | torchpack.callbacks.checkpoint:_trigger:111 | INFO | Checkpoint saved: "runs/run-ca762409-046a45b1/checkpoints/max-iou-test.pt" (50.849).
+2023-01-07 17:55:13.589 | torchpack.callbacks.checkpoint:_trigger:47 | INFO | Checkpoint saved: "runs/run-ca762409-046a45b1/checkpoints/step-1771.pt".
+2023-01-07 17:55:13.589 | torchpack.callbacks.writers:_trigger:60 | INFO | 
++ [iou/test] = 50.849
++ [iou/test/max] = 50.849
++ [loss] = 0.083047
+2023-01-07 17:55:13.589 | torchpack.train.trainer:train:90 | INFO | Epoch finished in 10 minutes 9 seconds.
+2023-01-07 17:55:13.589 | torchpack.train.trainer:train:94 | SUCCESS | 1 epochs of training finished in 10 minutes 9 seconds.

@@ -50,6 +50,8 @@ def main() -> None:
     dataset = builder.make_dataset()
     dataflow = {}
     for split in dataset:
+        print("JSR")
+        print(split)
         sampler = torch.utils.data.distributed.DistributedSampler(
             dataset[split],
             num_replicas=dist.size(),
@@ -57,7 +59,8 @@ def main() -> None:
             shuffle=(split == 'train'))
         dataflow[split] = torch.utils.data.DataLoader(
             dataset[split],
-            batch_size=configs.batch_size if split == 'train' else 8,
+            #batch_size=configs.batch_size if split == 'train' else 8,
+            batch_size=2,
             sampler=sampler,
             num_workers=configs.workers_per_gpu,
             pin_memory=True,
@@ -110,6 +113,7 @@ def main() -> None:
         inputs = _inputs['lidar']
         # targets = feed_dict['targets'].F.long().cuda(non_blocking=True)
         outputs = model(inputs)
+        #print(outputs)
         invs = feed_dict['inverse_map']
         all_labels = feed_dict['targets_mapped']
         # print("model",len(outputs),len(all_labels))
@@ -144,12 +148,12 @@ def main() -> None:
     df["Label"] =df["Label"].apply(lambda x: rle_encode(x))
     print(df.head(2))
     
-    sample_sub = pd.read_csv("sample_submission.csv")
+    sample_sub = pd.read_csv("./sample_submission.csv")
     df = sample_sub.merge(df,on=["ID","Label"],how="right")
     print(len(df))
     print(df.head(2))
     
-    df.to_csv("pred_baseline.csv",index=False)
+    df.to_csv("./pred_baseline.csv",index=False)
     # trainer.after_epoch()
 
 

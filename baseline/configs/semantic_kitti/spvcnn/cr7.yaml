@@ -1,0 +1,12 @@
+num_epochs: 1
+batch_size: 8
+
+model:
+  name: spvcnn
+  cr: 0.2
+
+dataset:
+  name: semantic_kitti
+  root: dataset/semantic-kitti
+  num_points: 8000
+  voxel_size: 5.0

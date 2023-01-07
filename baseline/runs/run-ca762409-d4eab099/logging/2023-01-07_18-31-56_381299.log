@@ -1,0 +1,31 @@
+2023-01-07 18:31:56.382 | __main__:main:47 | INFO | /home/shadowkin/spvnasv1/bin/python evaluate.py configs/semantic_kitti/default.yaml --name SemanticKITTI_val_SPVNAS@119GMAC
+2023-01-07 18:31:56.382 | __main__:main:48 | INFO | Experiment started: "runs/run-ca762409-d4eab099".
+workers_per_gpu: 8
+distributed: True
+amp_enabled: True
+data:
+  num_classes: 2
+  ignore_label: 255
+  training_size: 18238
+train:
+  seed: 1588147245
+  deterministic: False
+dataset:
+  name: semantic_kitti
+  root: dataset/semantic-kitti
+  num_points: 80000
+  voxel_size: 0.05
+num_epochs: 15
+batch_size: 16
+criterion:
+  name: cross_entropy
+  ignore_index: 255
+optimizer:
+  name: sgd
+  lr: 0.24
+  weight_decay: 0.0001
+  momentum: 0.9
+  nesterov: True
+scheduler:
+  name: cosine_warmup
+2023-01-07 18:31:57.277 | torchpack.callbacks.checkpoint:_before_train:147 | WARNING | No checkpoints found: "runs/run-ca762409-d4eab099/checkpoints".

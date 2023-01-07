@@ -42,7 +42,7 @@ def spvnas_specialized(net_id, pretrained=True, **kwargs):
     #         'cuda:%d'
     #         % dist.local_rank() if torch.cuda.is_available() else 'cpu')
     model = SPVCNN(num_classes=configs.data.num_classes,
-                       cr=0.5,
+                       cr=0.2,
                        pres=configs.dataset.voxel_size,
                        vres=configs.dataset.voxel_size)
     # model.manual_select(net_config)
@@ -54,7 +54,7 @@ def spvnas_specialized(net_id, pretrained=True, **kwargs):
         #                                % net_id),
         #                   map_location='cuda:%d' % dist.local_rank()
         #                   if torch.cuda.is_available() else 'cpu')['model']
-        init = torch.load('runs/run-69750e90-3767059a/checkpoints/step-13290.pt')['model']
+        init = torch.load('runs/run-ca762409-046a45b1/checkpoints/max-iou-test.pt')['model']
         model.load_state_dict(init)
     return model
 
